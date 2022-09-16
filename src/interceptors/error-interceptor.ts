@@ -37,7 +37,7 @@ import { AlertController } from 'ionic-angular';
                 break;
 
                 default:
-                  this.handleDefaultError(errorObj);
+                  this.handleDefaultEror(errorObj);
              }
 
              return Observable.throw(errorObj);
