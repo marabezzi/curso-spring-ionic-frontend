@@ -34,7 +34,7 @@ constructor(public http: HttpClient,
             observe: 'response',
             responseType: 'text'
         });
-}
+  }
 
   successfulLogin(authorizationValue : string){
     let tok = authorizationValue.substring(7);
