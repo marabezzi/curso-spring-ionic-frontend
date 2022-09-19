@@ -2,9 +2,10 @@ import { EstadoService } from './../../services/domain/estado.service';
 import { CidadeService } from './../../services/domain/cidade.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CidadeDTO } from '../../models/cidadeDTO';
 import { EstadoDTO } from '../../models/estadoDTO';
+import { ClienteService } from '../../services/domain/cliente.service';
 
 /**
  * Generated class for the SignupPage page.
@@ -29,7 +30,9 @@ export class SignupPage {
      public navParams: NavParams,
      public formBuilder: FormBuilder,
      public CidadeService: CidadeService,
-     public EstadoService: EstadoService
+     public estadoService: EstadoService,
+     public clienteService: ClienteService,
+     public alertCtrl: AlertController
      ) {
 
      this.formGroup = this.formBuilder.group({
@@ -50,8 +53,30 @@ export class SignupPage {
        cidadeId : [null, [Validators.required]]
      });
 }
-  signupUser() {
-    console.log("enviou o form");
+
+    signupUser() {
+      this.clienteService.insert(this.formGroup.value)
+        .subscribe(response => {
+          this.showInsertOk();
+        },
+        error => {});
+    }
+
+    showInsertOk() {
+      let alert = this.alertCtrl.create({
+        title: 'Sucesso!',
+        message: 'Cadastro efetuado com sucesso',
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      alert.present();
   }
 
   ionViewDidLoad(){
@@ -73,5 +98,7 @@ export class SignupPage {
       },
       error => {})
   }
+
+
 
 }
