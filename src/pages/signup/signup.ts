@@ -80,7 +80,7 @@ export class SignupPage {
   }
 
   ionViewDidLoad(){
-   this.EstadoService.findAll()
+   this.estadoService.findAll()
    .subscribe(Response => {
       this.estados = Response;
       this.formGroup.controls.estadoId.setValue(this.estados[0].id);
