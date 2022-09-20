@@ -1,7 +1,6 @@
 import { CartService } from './../../services/domain/cart.service';
 import { API_CONFIG } from './../../config/api.config';
 import { ProdutoService } from './../../services/domain/produto.service';
-import { StorageService } from './../../services/storage.service';
 import { CartItem } from './../../models/cart-item';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -62,4 +61,7 @@ export class CartPage {
     this.navCtrl.setRoot('CategoriasPage');
   }
 
+  checkout() {
+    this.navCtrl.push('PickAddressPage');
+  }
 }
